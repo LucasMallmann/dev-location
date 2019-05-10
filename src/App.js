@@ -1,7 +1,13 @@
-import React from "react";
+import React, { Fragment } from 'react';
 
-function App() {
-  return <h1>ola</h1>;
-}
+import GlobalStyle from './style';
+import Routes from './routes';
+
+const App = () => (
+  <Fragment>
+    <GlobalStyle />
+    <Routes />
+  </Fragment>
+);
 
 export default App;
