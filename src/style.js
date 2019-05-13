@@ -12,8 +12,18 @@ const GlobalStyle = createGlobalStyle`
     background: #9B65E6;
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
-    font-family: Arial, Helvetica, sans-serif
+    font-family: Arial, Helvetica, sans-serif;
   }
+
+  h1, h2, h3, h4, h5, h6, ul, li {
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    list-style: none;
+  }
+
 `;
 
 export default GlobalStyle;

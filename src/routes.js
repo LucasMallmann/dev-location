@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Main from './pages/main/Main';
 
-const Routes = props => (
+const Routes = () => (
   <BrowserRouter>
     <React.Fragment>
       <Switch>
