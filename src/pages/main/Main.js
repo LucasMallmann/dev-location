@@ -28,7 +28,7 @@ class Main extends Component {
   static propTypes = {
     formVisible: PropTypes.bool.isRequired,
     // eslint-disable-next-line react/forbid-prop-types
-    coordinates: PropTypes.array,
+    coordinates: PropTypes.object,
     showModal: PropTypes.func.isRequired,
   };
 
@@ -61,7 +61,8 @@ class Main extends Component {
   handleMapClick = (e) => {
     const [longitude, latitude] = e.lngLat;
     console.log(`Latitude: ${latitude} \nLongitude: ${longitude}`);
-    this.onChangeShowForm(e);
+    const { showModal } = this.props;
+    showModal({ latitude, longitude });
   };
 
   render() {
@@ -70,7 +71,7 @@ class Main extends Component {
     return (
       <Fragment>
         <Sidebar />
-        {formVisible && <Form onChangeShowForm={this.onChangeShowForm} />}
+        {formVisible && <Form />}
         <ReactMapGL
           {...viewport}
           onViewportChange={view => this.setState({ viewport: view })}
