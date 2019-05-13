@@ -6,9 +6,9 @@ export const Types = {
 
 /** Actions */
 export const Creators = {
-  addRequest: user => ({
+  addRequest: (user, coordinates) => ({
     type: Types.ADD_REQUEST,
-    payload: { user },
+    payload: { user, coordinates },
   }),
   addSuccess: data => ({
     type: Types.ADD_SUCCESS,

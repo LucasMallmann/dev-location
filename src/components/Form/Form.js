@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/button-has-type */
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
@@ -6,6 +7,7 @@ import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
 import { Creators as FormActions } from '../../store/ducks/form';
+import { Creators as UserActions } from '../../store/ducks/user';
 
 import {
   Form as StyledForm, Button, Backdrop, ConfirmButton,
@@ -13,15 +15,26 @@ import {
 
 class Form extends Component {
   static propTypes = {
-    onChangeShowForm: PropTypes.func.isRequired,
-    showModal: PropTypes.func,
-    hideModal: PropTypes.func,
+    form: PropTypes.shape({
+      hideModal: PropTypes.func.isRequired,
+    }).isRequired,
+    user: PropTypes.shape({
+      addRequest: PropTypes.func.isRequired,
+    }).isRequired,
+    coordinates: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+    }).isRequired,
   };
 
   state = {
     // eslint-disable-next-line react/no-unused-state
     userInput: '',
   };
+
+  componentDidMount() {
+    console.log(this.props);
+  }
 
   onChangeInputHandler = (e) => {
     this.setState({
@@ -32,10 +45,14 @@ class Form extends Component {
 
   onHandleSubmit = (e) => {
     e.preventDefault();
+    const { addRequest } = this.props.user;
+    const { userInput } = this.state;
+    const { coordinates } = this.props;
+    addRequest(userInput, coordinates);
   };
 
   render() {
-    const { hideModal } = this.props;
+    const { hideModal } = this.props.form;
     return (
       <Fragment>
         <Backdrop onClick={hideModal} />
@@ -44,7 +61,7 @@ class Form extends Component {
           <input type="text" placeholder="Digite o usuário" onChange={this.onChangeInputHandler} />
           <div>
             <Button onClick={hideModal}>Cancelar</Button>
-            <ConfirmButton onClick={() => console.log('salvei')}>Salvar</ConfirmButton>
+            <ConfirmButton onClick={this.onHandleSubmit}>Salvar</ConfirmButton>
           </div>
         </StyledForm>
       </Fragment>
@@ -54,9 +71,13 @@ class Form extends Component {
 
 const mapStateToProps = state => ({
   formVisible: state.form.formVisible,
+  coordinates: state.form.coordinates,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(FormActions, dispatch);
+const mapDispatchToProps = dispatch => ({
+  form: bindActionCreators(FormActions, dispatch),
+  user: bindActionCreators(UserActions, dispatch),
+});
 
 export default connect(
   mapStateToProps,
