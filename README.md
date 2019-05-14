@@ -1,68 +1,33 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Dev Location
 
-## Available Scripts
+Aplicação para localização de desenvolvedores utilizando o maps da Uber. Para buscar os desenvolvedores, o projeto utiliza a própria API do Github.
 
-In the project directory, you can run:
+### Download e Instalação
 
-### `npm start`
+Dentro do repositório, execute `npm install`. Caso esteja utilizando o yarn: `yarn`.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Arquitetura
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Este projeto utiliza o [Redux](https://redux.js.org/) para gerenciamento dos estados, juntamente com a biblioteca [Redux Saga](https://github.com/redux-saga/redux-saga) para realizar operações assíncronas.
 
-### `npm test`
+Para organizar o store, foi utilizada a arquitetura [Ducks](https://github.com/erikras/ducks-modular-redux) (Vale muito a pena dar uma olhada).
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Para a estilização do projeto foi utilizada a biblitoeca [Styled-Components](https://www.styled-components.com/)
 
-### `npm run build`
+### Layout da aplicação
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Home
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+![alt text](images/first.png "Logo Title Text 1")
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Form
 
-### `npm run eject`
+![alt text](images/form.png "Logo Title Text 1")
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Feedback
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![alt text](images/success.png "Logo Title Text 1")
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Success
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![alt text](images/added.png "Logo Title Text 1")
