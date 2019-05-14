@@ -30,19 +30,30 @@ class Main extends Component {
     // eslint-disable-next-line react/forbid-prop-types
     coordinates: PropTypes.object,
     showModal: PropTypes.func.isRequired,
+    users: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        username: PropTypes.string.isRequired,
+        avatar: PropTypes.string.isRequired,
+        coordinates: PropTypes.shape({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+        }),
+      }),
+    ).isRequired,
   };
 
   componentDidMount() {
     window.addEventListener('resize', this._resize);
     this._resize();
-    console.log(this.props);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this._resize);
   }
 
-  onChangeShowForm = (e) => {
+  onChangeShowForm = () => {
     const { showModal } = this.props;
     showModal();
   };
@@ -60,14 +71,14 @@ class Main extends Component {
 
   handleMapClick = (e) => {
     const [longitude, latitude] = e.lngLat;
-    console.log(`Latitude: ${latitude} \nLongitude: ${longitude}`);
     const { showModal } = this.props;
     showModal({ latitude, longitude });
   };
 
   render() {
     const { viewport } = this.state;
-    const { formVisible } = this.props;
+    const { formVisible, users } = this.props;
+
     return (
       <Fragment>
         <Sidebar />
@@ -79,17 +90,25 @@ class Main extends Component {
           mapStyle="mapbox://styles/mapbox/basic-v9"
           onClick={this.handleMapClick}
         >
-          <Marker latitude={-23.5439948} longitude={-46.6065452} offsetLeft={-20} offsetTop={-10}>
-            <Image
-              style={{
-                borderRadius: 100,
-                width: 48,
-                height: 48,
-              }}
-              src="https://avatars2.githubusercontent.com/u/23031413?v=4"
-              alt="img"
-            />
-          </Marker>
+          {users.map(user => (
+            <Marker
+              latitude={user.coordinates.latitude}
+              longitude={user.coordinates.longitude}
+              offsetLeft={-20}
+              offsetTop={-10}
+              key={user.id}
+            >
+              <Image
+                style={{
+                  borderRadius: 100,
+                  width: 48,
+                  height: 48,
+                }}
+                src={user.avatar}
+                alt="img"
+              />
+            </Marker>
+          ))}
         </ReactMapGL>
       </Fragment>
     );
@@ -103,6 +122,7 @@ Main.defaultProps = {
 const mapStateToProps = state => ({
   formVisible: state.form.visible,
   coordinates: state.form.coordinates,
+  users: state.user.data,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(FormActions, dispatch);

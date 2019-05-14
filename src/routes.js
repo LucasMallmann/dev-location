@@ -7,7 +7,7 @@ const Routes = () => (
   <BrowserRouter>
     <React.Fragment>
       <Switch>
-        <Route path="" component={Main} />
+        <Route path="/" component={Main} />
       </Switch>
     </React.Fragment>
   </BrowserRouter>
